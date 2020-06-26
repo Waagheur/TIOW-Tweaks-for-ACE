@@ -1,267 +1,210 @@
 class CBA_Extended_EventHandlers_base;
 class CfgPatches
 {
-	class TIOW_Tau_Air_Caste
-	{
-		units[]=
-		{
-			"TIOW_Air_Caste_Pilot_B",
-			"TIOW_Air_Caste_Pilot_O",
-			"TIOW_Air_Caste_Pilot_I",
-			"TIOW_Tau_Crew",
-			"TIOW_Tau_Crew_DY",
-			"TIOW_Tau_Crew_SC",
-			"TIOW_Tau_Crew_VL",
-			"TIOW_Tau_Crew_FE",
-			"TIOW_Tau_Crew_I",
-			"TIOW_Tau_Crew_DY_I",
-			"TIOW_Tau_Crew_VL_I",
-			"TIOW_Tau_Crew_SC_I",
-			"TIOW_Tau_Crew_FE_I",
-			"TIOW_Tau_Crew_O",
-			"TIOW_Tau_Crew_DY_O",
-			"TIOW_Tau_Crew_VL_O",
-			"TIOW_Tau_Crew_SC_O",
-			"TIOW_Tau_Crew_FE_O"
+	class TIOW_ACE_MOD {
+		author = "Waagheur";
+		name = "TIOW Tweaks for ACE";
+		requiredAddons[] = {
+			"TIOW_40k_Tau",
+			"A3_Characters_F",
+			"CadFoot",
+			"TIOW_Valhallans"
 		};
-		weapons[]=
-		{
-			"U_TIOW_Air_Caste_Pilot",
-			"U_TIOW_Tau_Crew",
-			"U_TIOW_Tau_Crew_DY",
-			"U_TIOW_Tau_Crew_SC",
-			"U_TIOW_Tau_Crew_VL",
-			"U_TIOW_Tau_Crew_FE",
-			"U_TIOW_Air_Caste_Pilot_I",
-			"U_TIOW_Tau_Crew_I",
-			"U_TIOW_Tau_Crew_DY_I",
-			"U_TIOW_Tau_Crew_SC_I",
-			"U_TIOW_Tau_Crew_VL_I",
-			"U_TIOW_Tau_Crew_FE_I",
-			"U_TIOW_Air_Caste_Pilot_O",
-			"U_TIOW_Tau_Crew_O",
-			"U_TIOW_Tau_Crew_DY_O",
-			"U_TIOW_Tau_Crew_SC_O",
-			"U_TIOW_Tau_Crew_VL_O",
-			"U_TIOW_Tau_Crew_FE_O"
-		};
-		requiredVersion=0.1;
-		requiredAddons[]=
-		{
-			"A3_Characters_F"
-		};
+		requiredVersion = 0.1;
+		units[] = {};
+		weapons[] = {};
+		worlds[] = {};
 	};
 };
+
+#define ADD_ACE_HITPOINTS(arm_armor,leg_armor)
+     class HitLeftArm {
+         armor = arm_armor;
+         material = -1;
+         name = "hand_l";
+         passThrough = 1;
+         radius = 0.08;
+         explosionShielding = 1;
+         visual = "injury_hands";
+         minimalHit = 0;
+     };
+     class HitRightArm: HitLeftArm {
+         name = "hand_r";
+     };
+     class HitLeftLeg {
+         armor = leg_armor;
+         material = -1;
+         name = "leg_l";
+         passThrough = 1;
+         radius = 0.1;
+         explosionShielding = 1;
+         visual = "injury_legs";
+         minimalHit = 0;
+     };
+     class HitRightLeg: HitLeftLeg {
+         name = "leg_r";
+     };
+     class ACE_HDBracket {
+         armor = 1;
+         material = -1;
+         name = "head";
+         passThrough = 0;
+         radius = 1;
+         explosionShielding = 1;
+         visual = "";
+         minimalHit = 0;
+         depends = "HitHead";
+     };
+
 class cfgVehicles
 {
-	class B_Soldier_base_F;
-	class TIOW_Air_Caste_Pilot_B: B_Soldier_base_F
+	class CadTroopBase;
+	class TIOWACE_Fire_Warrior: CadTroopBase
 	{
-		scope=2;
-		scopeCurator=2;
-		scopeArsenal=2;
-		identityTypes[]=
+		uniformClass = "U_TIOW_Fire_Warrior";
+		model="\40k_tau\Fire_Warrior\Fire_Warrior.p3d";
+		hiddenSelections[]=
 		{
-			"Tau",
-			"LanguageENGB_F"
+			"camo",
+			"camo1"
 		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_CA"
+		};
+	};
+	
+	class TIOW_Fire_Warrior_DY: TIOWACE_Fire_Warrior
+	{
+		uniformClass="U_TIOW_Fire_Warrior_DY";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_DY_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_DY_CA"
+		};
+	};
+	class TIOW_Fire_Warrior_SC: TIOWACE_Fire_Warrior
+	{
+		uniformClass="U_TIOW_Fire_Warrior_SC";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_SC_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_SC_CA"
+		};
+	};
+	class TIOW_Fire_Warrior_VL: TIOWACE_Fire_Warrior
+	{
+		uniformClass="U_TIOW_Fire_Warrior_VL";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_VL_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_VL_CA"
+		};
+	};
+	class TIOW_Fire_Warrior_FE: TIOWACE_Fire_Warrior
+	{
+		uniformClass="U_TIOW_Fire_Warrior_FE";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_FE_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_FE_CA"
+		};
+	};
+	class TIOWACE_Pathfinder: CadTroopBase
+	{
+		uniformClass="TIOW_Pathfinder";
+		model="\40k_tau\Pathfinder\Pathfinder.p3d";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_CA",
+			"\40k_tau\Pathfinder\data\Pathfinder_Cloth_CA"
+		};
+	};
+	class TIOW_Pathfinder_DY: TIOWACE_Pathfinder
+	{
+		uniformClass="U_TIOW_Pathfinder_DY";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_DY_CA",
+			"\40k_tau\Pathfinder\data\Pathfinder_Cloth_DY_CA"
+		};
+	};
+	class TIOW_Pathfinder_SC: TIOWACE_Pathfinder
+	{
+		uniformClass="U_TIOW_Pathfinder_SC";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_SC_CA",
+			"\40k_tau\Pathfinder\data\Pathfinder_Cloth_SC_CA"
+		};
+	};
+	class TIOW_Pathfinder_VL: TIOWACE_Pathfinder
+	{
+		uniformClass="U_TIOW_Pathfinder_VL";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_VL_CA",
+			"\40k_tau\Pathfinder\data\Pathfinder_Cloth_VL_CA"
+		};
+	};
+	class TIOW_Pathfinder_FE: TIOWACE_Pathfinder
+	{
+		uniformClass="U_TIOW_Pathfinder_FE";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_FE_CA",
+			"\40k_tau\Pathfinder\data\Pathfinder_Cloth_FE_CA"
+		};
+	};
+	class TIOWACE_Air_Caste_Pilot_B: CadTroopBase
+	{
 		model="\40k_tau\Air_Caste_Pilot\Air_Caste_Pilot.p3d";
-		uniformClass="U_TIOW_Air_Caste_Pilot";
-		nakedUniform="U_BasicBody";
-		icon="iconManEngineer";
-		picture="pictureRepair";
-		glassesEnabled=0;
-		camouflage=1;
-		side=1;
-		faction="Tau_B";
-		editorSubcategory="EdSubCat_TIOW_Tau_AirCaste";
-		displayName="Tau Air Caste Pilot";
-		backpack="";
-		vest="";
-		weapons[]=
-		{
-			"TIOW_pulse_pistol_VL",
-			"Throw",
-			"Put"
-		};
-		respawnWeapons[]=
-		{
-			"TIOW_pulse_pistol_VL",
-			"Throw",
-			"Put"
-		};
-		Items[]=
-		{
-			"FirstAidKit"
-		};
-		RespawnItems[]=
-		{
-			"FirstAidKit"
-		};
-		magazines[]=
-		{
-			"TIOW_pulse_pistol_mag",
-			"TIOW_pulse_pistol_mag"
-		};
-		respawnMagazines[]=
-		{
-			"TIOW_pulse_pistol_mag",
-			"TIOW_pulse_pistol_mag"
-		};
-		linkedItems[]={};
-		respawnLinkedItems[]={};
-		class UniformInfo
-		{
-			class SlotsInfo
-			{
-				class UniformSlotInfo;
-				class NVG: UniformSlotInfo
-				{
-					slotType="NVG_SLOT";
-				};
-				class Scuba: UniformSlotInfo
-				{
-					slotType="SCUBA_SLOT";
-				};
-				class Googles: UniformSlotInfo
-				{
-					slotType="GOGGLE_SLOT";
-				};
-				class Headgear: UniformSlotInfo
-				{
-					slotType="HEADGEAR_SLOT";
-				};
-			};
-		};
-		class HitPoints
-		{
-			class HitFace
-			{
-				armor=1;
-				material=-1;
-				name="face_hub";
-				passThrough=0.1;
-				radius=0.079999998;
-				explosionShielding=0.1;
-				minimalHit=0.0099999998;
-			};
-			class HitNeck: HitFace
-			{
-				armor=20;
-				material=-1;
-				name="neck";
-				passThrough=0.1;
-				radius=0.1;
-				explosionShielding=0.5;
-				minimalHit=0.0099999998;
-			};
-			class HitHead: HitNeck
-			{
-				armor=20;
-				material=-1;
-				name="head";
-				passThrough=0.1;
-				radius=0.2;
-				explosionShielding=0.5;
-				minimalHit=0.0099999998;
-				depends="HitFace max HitNeck";
-			};
-			class HitPelvis
-			{
-				armor=50;
-				material=-1;
-				name="pelvis";
-				passThrough=0.1;
-				radius=0.2;
-				explosionShielding=1;
-				visual="injury_body";
-				minimalHit=0.0099999998;
-			};
-			class HitAbdomen: HitPelvis
-			{
-				armor=50;
-				material=-1;
-				name="spine1";
-				passThrough=0.1;
-				radius=0.15000001;
-				explosionShielding=1;
-				visual="injury_body";
-				minimalHit=0.0099999998;
-			};
-			class HitDiaphragm: HitAbdomen
-			{
-				armor=50;
-				material=-1;
-				name="spine2";
-				passThrough=0.1;
-				radius=0.15000001;
-				explosionShielding=6;
-				visual="injury_body";
-				minimalHit=0.0099999998;
-			};
-			class HitChest: HitDiaphragm
-			{
-				armor=200;
-				material=-1;
-				name="spine3";
-				passThrough=0.1;
-				radius=0.15000001;
-				explosionShielding=6;
-				visual="injury_body";
-				minimalHit=0.0099999998;
-			};
-			class HitBody: HitChest
-			{
-				armor=100;
-				material=-1;
-				name="body";
-				passThrough=0.1;
-				radius=0.16;
-				explosionShielding=6;
-				visual="injury_body";
-				minimalHit=0.0099999998;
-				depends="HitPelvis max HitAbdomen max HitDiaphragm max HitChest";
-			};
-			class HitArms
-			{
-				armor=100;
-				material=-1;
-				name="arms";
-				passThrough=1;
-				radius=0.1;
-				explosionShielding=1;
-				visual="injury_hands";
-				minimalHit=0.0099999998;
-			};
-			class HitHands: HitArms
-			{
-				armor=50;
-				material=-1;
-				name="hands";
-				passThrough=1;
-				radius=0.1;
-				explosionShielding=1;
-				visual="injury_hands";
-				minimalHit=0.0099999998;
-				depends="HitArms";
-			};
-			class HitLegs
-			{
-				armor=100;
-				material=-1;
-				name="legs";
-				passThrough=1;
-				radius=0.12;
-				explosionShielding=1;
-				visual="injury_legs";
-				minimalHit=0.0099999998;
-			};
-		};
-		armor=2;
-		armorStructural=0.40000001;
-		explosionShielding=0.039999999;
-		minTotalDamageThreshold=0.001;
-		impactDamageMultiplier=0.5;
 		hiddenSelections[]=
 		{
 			"camo",
@@ -273,22 +216,14 @@ class cfgVehicles
 			"\40k_tau\Air_Caste_Pilot\data\Air_caste_uniform_top_CA.paa"
 		};
 	};
-	class TIOW_Air_Caste_Pilot_I: TIOW_Air_Caste_Pilot_B
+	class TIOW_Air_Caste_Pilot_I: TIOWACE_Air_Caste_Pilot_B
 	{
-		side=2;
-		faction="Tau_I";
-		uniformClass="U_TIOW_Air_Caste_Pilot_I";
 	};
-	class TIOW_Air_Caste_Pilot_O: TIOW_Air_Caste_Pilot_B
+	class TIOW_Air_Caste_Pilot_O: TIOWACE_Air_Caste_Pilot_B
 	{
-		side=0;
-		faction="Tau_O";
-		uniformClass="U_TIOW_Air_Caste_Pilot_O";
 	};
-	class TIOW_Tau_Crew: TIOW_Air_Caste_Pilot_B
+	class TIOW_Tau_Crew: TIOWACE_Air_Caste_Pilot_B
 	{
-		uniformClass="U_TIOW_Tau_Crew";
-		displayName="Tau Vehicle Crew";
 		hiddenSelections[]=
 		{
 			"camo",
@@ -300,10 +235,8 @@ class cfgVehicles
 			"\40k_tau\Air_Caste_Pilot\data\Air_caste_uniform_top_TA_CA.paa"
 		};
 	};
-	class TIOW_Tau_Crew_DY: TIOW_Air_Caste_Pilot_B
+	class TIOW_Tau_Crew_DY: TIOWACE_Air_Caste_Pilot_B
 	{
-		uniformClass="U_TIOW_Tau_Crew_DY";
-		displayName="Tau Vehicle Crew (Dal'Yth)";
 		hiddenSelections[]=
 		{
 			"camo",
@@ -315,10 +248,8 @@ class cfgVehicles
 			"\40k_tau\Air_Caste_Pilot\data\Air_caste_uniform_top_DY_CA.paa"
 		};
 	};
-	class TIOW_Tau_Crew_SC: TIOW_Air_Caste_Pilot_B
+	class TIOW_Tau_Crew_SC: TIOWACE_Air_Caste_Pilot_B
 	{
-		uniformClass="U_TIOW_Tau_Crew_SC";
-		displayName="Tau Vehicle Crew (Sa'Cea)";
 		hiddenSelections[]=
 		{
 			"camo",
@@ -330,10 +261,8 @@ class cfgVehicles
 			"\40k_tau\Air_Caste_Pilot\data\Air_caste_uniform_top_SC_CA.paa"
 		};
 	};
-	class TIOW_Tau_Crew_VL: TIOW_Air_Caste_Pilot_B
+	class TIOW_Tau_Crew_VL: TIOWACE_Air_Caste_Pilot_B
 	{
-		uniformClass="U_TIOW_Tau_Crew_VL";
-		displayName="Tau Vehicle Crew (Vior'La)";
 		hiddenSelections[]=
 		{
 			"camo",
@@ -345,10 +274,8 @@ class cfgVehicles
 			"\40k_tau\Air_Caste_Pilot\data\Air_caste_uniform_top_VL_CA.paa"
 		};
 	};
-	class TIOW_Tau_Crew_FE: TIOW_Air_Caste_Pilot_B
+	class TIOW_Tau_Crew_FE: TIOWACE_Air_Caste_Pilot_B
 	{
-		uniformClass="U_TIOW_Tau_Crew_FE";
-		displayName="Tau Vehicle Crew (Farsight Enclaves)";
 		hiddenSelections[]=
 		{
 			"camo",
@@ -362,79 +289,753 @@ class cfgVehicles
 	};
 	class TIOW_Tau_Crew_I: TIOW_Tau_Crew
 	{
-		side=2;
-		faction="Tau_I";
-		uniformClass="U_TIOW_Tau_Crew_I";
 	};
 	class TIOW_Tau_Crew_DY_I: TIOW_Tau_Crew_DY
 	{
-		side=2;
-		faction="Tau_I";
-		uniformClass="U_TIOW_Tau_Crew_DY_I";
 	};
 	class TIOW_Tau_Crew_VL_I: TIOW_Tau_Crew_VL
 	{
-		side=2;
-		faction="Tau_I";
-		uniformClass="U_TIOW_Tau_Crew_VL_I";
 	};
 	class TIOW_Tau_Crew_SC_I: TIOW_Tau_Crew_SC
 	{
-		side=2;
-		faction="Tau_I";
-		uniformClass="U_TIOW_Tau_Crew_SC_I";
 	};
 	class TIOW_Tau_Crew_FE_I: TIOW_Tau_Crew_FE
 	{
-		side=2;
-		faction="Tau_I";
-		uniformClass="U_TIOW_Tau_Crew_FE_I";
 	};
 	class TIOW_Tau_Crew_O: TIOW_Tau_Crew
 	{
-		side=0;
-		faction="Tau_O";
-		uniformClass="U_TIOW_Tau_Crew_O";
 	};
 	class TIOW_Tau_Crew_DY_O: TIOW_Tau_Crew_DY
 	{
-		side=0;
-		faction="Tau_O";
-		uniformClass="U_TIOW_Tau_Crew_DY_O";
 	};
 	class TIOW_Tau_Crew_VL_O: TIOW_Tau_Crew_VL
 	{
-		side=0;
-		faction="Tau_O";
-		uniformClass="U_TIOW_Tau_Crew_VL_O";
 	};
 	class TIOW_Tau_Crew_SC_O: TIOW_Tau_Crew_SC
 	{
-		side=0;
-		faction="Tau_O";
-		uniformClass="U_TIOW_Tau_Crew_SC_O";
 	};
 	class TIOW_Tau_Crew_FE_O: TIOW_Tau_Crew_FE
 	{
-		side=0;
-		faction="Tau_O";
-		uniformClass="U_TIOW_Tau_Crew_FE_O";
 	};
-};
-class CfgEditorSubCategories
-{
-	class EdSubCat_TIOW_Tau_AirCaste
+	class TIOWACE_Valhallan_Trooper_1_Blu: CadTroopBase
 	{
-		author="[TIOW]Sokolonko";
-		displayName="Tau Crew";
+		uniformClass="U_TIOW_Valhallan_Blu";
+		model="\TIOW_Valhallans\TIOW_Valhallan_Uniforms\Valhallan_uniform.p3d";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_black_CA.paa"
+		};
+	};
+	class TIOW_Valhallan_Trooper_2_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+	};
+	class TIOW_Valhallan_NCO_1_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+	};
+	class TIOW_Valhallan_Meltagunner_1_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+	};
+	class TIOW_Valhallan_Stubber_2_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+	};
+	class TIOW_Valhallan_Launcher_1_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+	};
+	class TIOW_Valhallan_Plasmagunner_1_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+	};
+	class TIOW_Valhallan_Tanker_1_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+	};
+	class TIOW_Valhallan_Trooper_1_Indep: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_Indep";
+	};
+	class TIOW_Valhallan_Trooper_2_Indep: TIOW_Valhallan_Trooper_2_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_Indep";
+	};
+	class TIOW_Valhallan_NCO_1_Indep: TIOW_Valhallan_NCO_1_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_Indep";
+	};
+	class TIOW_Valhallan_Meltagunner_1_Indep: TIOW_Valhallan_Meltagunner_1_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_Indep";
+	};
+	class TIOW_Valhallan_Stubber_2_Indep: TIOW_Valhallan_Stubber_2_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_Indep";
+	};
+	class TIOW_Valhallan_Launcher_1_Indep: TIOW_Valhallan_Launcher_1_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_Indep";
+	};
+	class TIOW_Valhallan_Plasmagunner_1_Indep: TIOW_Valhallan_Plasmagunner_1_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_Indep";
+	};
+	class TIOW_Valhallan_Tanker_1_Indep: TIOW_Valhallan_Tanker_1_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_Indep";
+	};
+	class TIOW_Valhallan_Trooper_1_OP: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_OP";
+	};
+	class TIOW_Valhallan_Trooper_2_OP: TIOW_Valhallan_Trooper_2_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_OP";
+	};
+	class TIOW_Valhallan_NCO_1_OP: TIOW_Valhallan_NCO_1_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_OP";
+	};
+	class TIOW_Valhallan_Meltagunner_1_OP: TIOW_Valhallan_Meltagunner_1_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_OP";
+	};
+	class TIOW_Valhallan_Stubber_2_OP: TIOW_Valhallan_Stubber_2_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_OP";
+	};
+	class TIOW_Valhallan_Launcher_1_OP: TIOW_Valhallan_Launcher_1_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_OP";
+	};
+	class TIOW_Valhallan_Plasmagunner_1_OP: TIOW_Valhallan_Plasmagunner_1_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_OP";
+	};
+	class TIOW_Valhallan_Tanker_1_OP: TIOW_Valhallan_Tanker_1_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_OP";
+	};
+	class TIOW_Valhallan_Trooper_1_white_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+		uniformClass="U_TIOW_Valhallan_white_Blu";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_white_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_white_CA.paa"
+		};
+	};
+	class TIOW_Valhallan_Trooper_2_white_Blu: TIOW_Valhallan_Trooper_1_white_Blu
+	{
+	};
+	class TIOW_Valhallan_NCO_1_white_Blu: TIOW_Valhallan_Trooper_1_white_Blu
+	{
+	};
+	class TIOW_Valhallan_Meltagunner_1_white_Blu: TIOW_Valhallan_Trooper_1_white_Blu
+	{
+	};
+	class TIOW_Valhallan_Stubber_2_white_Blu: TIOW_Valhallan_Trooper_1_white_Blu
+	{
+	};
+	class TIOW_Valhallan_Launcher_1_white_Blu: TIOW_Valhallan_Trooper_1_white_Blu
+	{
+	};
+	class TIOW_Valhallan_Plasmagunner_1_white_Blu: TIOW_Valhallan_Trooper_1_white_Blu
+	{
+	};
+	class TIOW_Valhallan_Tanker_1_white_Blu: TIOW_Valhallan_Trooper_1_white_Blu
+	{
+	};
+	class TIOW_Valhallan_Trooper_1_white_Indep: TIOW_Valhallan_Trooper_1_white_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_white_Indep";
+	};
+	class TIOW_Valhallan_Trooper_2_white_Indep: TIOW_Valhallan_Trooper_2_white_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_white_Indep";
+	};
+	class TIOW_Valhallan_NCO_1_white_Indep: TIOW_Valhallan_NCO_1_white_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_white_Indep";
+	};
+	class TIOW_Valhallan_Meltagunner_1_white_Indep: TIOW_Valhallan_Meltagunner_1_white_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_white_Indep";
+	};
+	class TIOW_Valhallan_Stubber_2_white_Indep: TIOW_Valhallan_Stubber_2_white_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_white_Indep";
+	};
+	class TIOW_Valhallan_Launcher_1_white_Indep: TIOW_Valhallan_Launcher_1_white_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_white_Indep";
+	};
+	class TIOW_Valhallan_Plasmagunner_1_white_Indep: TIOW_Valhallan_Plasmagunner_1_white_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_white_Indep";
+	};
+	class TIOW_Valhallan_Tanker_1_white_Indep: TIOW_Valhallan_Tanker_1_white_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_white_Indep";
+	};
+	class TIOW_Valhallan_Trooper_1_white_OP: TIOW_Valhallan_Trooper_1_white_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_white_OP";
+	};
+	class TIOW_Valhallan_Trooper_2_white_OP: TIOW_Valhallan_Trooper_2_white_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_white_OP";
+	};
+	class TIOW_Valhallan_NCO_1_white_OP: TIOW_Valhallan_NCO_1_white_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_white_OP";
+	};
+	class TIOW_Valhallan_Meltagunner_1_white_OP: TIOW_Valhallan_Meltagunner_1_white_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_white_OP";
+	};
+	class TIOW_Valhallan_Stubber_2_white_OP: TIOW_Valhallan_Stubber_2_white_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_white_OP";
+	};
+	class TIOW_Valhallan_Launcher_1_white_OP: TIOW_Valhallan_Launcher_1_white_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_white_OP";
+	};
+	class TIOW_Valhallan_Plasmagunner_1_white_OP: TIOW_Valhallan_Plasmagunner_1_white_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_white_OP";
+	};
+	class TIOW_Valhallan_Tanker_1_white_OP: TIOW_Valhallan_Tanker_1_white_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_white_OP";
+	};
+	class TIOW_Valhallan_Trooper_1_camo_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+		uniformClass="U_TIOW_Valhallan_camo_Blu";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_camo_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_white_CA.paa"
+		};
+	};
+	class TIOW_Valhallan_Trooper_2_camo_Blu: TIOW_Valhallan_Trooper_1_camo_Blu
+	{
+	};
+	class TIOW_Valhallan_NCO_1_camo_Blu: TIOW_Valhallan_Trooper_1_camo_Blu
+	{
+	};
+	class TIOW_Valhallan_Meltagunner_1_camo_Blu: TIOW_Valhallan_Trooper_1_camo_Blu
+	{
+	};
+	class TIOW_Valhallan_Stubber_2_camo_Blu: TIOW_Valhallan_Trooper_1_camo_Blu
+	{
+	};
+	class TIOW_Valhallan_Launcher_1_camo_Blu: TIOW_Valhallan_Trooper_1_camo_Blu
+	{
+	};
+	class TIOW_Valhallan_Plasmagunner_1_camo_Blu: TIOW_Valhallan_Trooper_1_camo_Blu
+	{
+	};
+	class TIOW_Valhallan_Tanker_1_camo_Blu: TIOW_Valhallan_Trooper_1_camo_Blu
+	{
+	};
+	class TIOW_Valhallan_Trooper_1_camo_Indep: TIOW_Valhallan_Trooper_1_camo_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_camo_Indep";
+	};
+	class TIOW_Valhallan_Trooper_2_camo_Indep: TIOW_Valhallan_Trooper_2_camo_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_camo_Indep";
+	};
+	class TIOW_Valhallan_NCO_1_camo_Indep: TIOW_Valhallan_NCO_1_camo_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_camo_Indep";
+	};
+	class TIOW_Valhallan_Meltagunner_1_camo_Indep: TIOW_Valhallan_Meltagunner_1_camo_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_camo_Indep";
+	};
+	class TIOW_Valhallan_Stubber_2_camo_Indep: TIOW_Valhallan_Stubber_2_camo_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_camo_Indep";
+	};
+	class TIOW_Valhallan_Launcher_1_camo_Indep: TIOW_Valhallan_Launcher_1_camo_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_camo_Indep";
+	};
+	class TIOW_Valhallan_Plasmagunner_1_camo_Indep: TIOW_Valhallan_Plasmagunner_1_camo_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_camo_Indep";
+	};
+	class TIOW_Valhallan_Tanker_1_camo_Indep: TIOW_Valhallan_Tanker_1_camo_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_camo_Indep";
+	};
+	class TIOW_Valhallan_Trooper_1_camo_OP: TIOW_Valhallan_Trooper_1_camo_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_camo_OP";
+	};
+	class TIOW_Valhallan_Trooper_2_camo_OP: TIOW_Valhallan_Trooper_2_camo_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_camo_OP";
+	};
+	class TIOW_Valhallan_NCO_1_camo_OP: TIOW_Valhallan_NCO_1_camo_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_camo_OP";
+	};
+	class TIOW_Valhallan_Meltagunner_1_camo_OP: TIOW_Valhallan_Meltagunner_1_camo_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_camo_OP";
+	};
+	class TIOW_Valhallan_Stubber_2_camo_OP: TIOW_Valhallan_Stubber_2_camo_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_camo_OP";
+	};
+	class TIOW_Valhallan_Launcher_1_camo_OP: TIOW_Valhallan_Launcher_1_camo_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_camo_OP";
+	};
+	class TIOW_Valhallan_Plasmagunner_1_camo_OP: TIOW_Valhallan_Plasmagunner_1_camo_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_camo_OP";
+	};
+	class TIOW_Valhallan_Tanker_1_camo_OP: TIOW_Valhallan_Tanker_1_camo_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_camo_OP";
+	};
+	class TIOW_Valhallan_Trooper_1_brown_Blu: TIOWACE_Valhallan_Trooper_1_Blu
+	{
+		uniformClass="U_TIOW_Valhallan_brown_Blu";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_brown_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_brown_CA.paa"
+		};
+	};
+	class TIOW_Valhallan_Trooper_2_brown_Blu: TIOW_Valhallan_Trooper_1_brown_Blu
+	{
+	};
+	class TIOW_Valhallan_NCO_1_brown_Blu: TIOW_Valhallan_Trooper_1_brown_Blu
+	{
+	};
+	class TIOW_Valhallan_Meltagunner_1_brown_Blu: TIOW_Valhallan_Trooper_1_brown_Blu
+	{
+	};
+	class TIOW_Valhallan_Stubber_2_brown_Blu: TIOW_Valhallan_Trooper_1_brown_Blu
+	{
+	};
+	class TIOW_Valhallan_Launcher_1_brown_Blu: TIOW_Valhallan_Trooper_1_brown_Blu
+	{
+	};
+	class TIOW_Valhallan_Plasmagunner_1_brown_Blu: TIOW_Valhallan_Trooper_1_brown_Blu
+	{
+	};
+	class TIOW_Valhallan_Tanker_1_brown_Blu: TIOW_Valhallan_Trooper_1_brown_Blu
+	{
+	};
+	class TIOW_Valhallan_Trooper_1_brown_Indep: TIOW_Valhallan_Trooper_1_brown_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_brown_Indep";
+	};
+	class TIOW_Valhallan_Trooper_2_brown_Indep: TIOW_Valhallan_Trooper_2_brown_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_brown_Indep";
+	};
+	class TIOW_Valhallan_NCO_1_brown_Indep: TIOW_Valhallan_NCO_1_brown_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_brown_Indep";
+	};
+	class TIOW_Valhallan_Meltagunner_1_brown_Indep: TIOW_Valhallan_Meltagunner_1_brown_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_brown_Indep";
+	};
+	class TIOW_Valhallan_Stubber_2_brown_Indep: TIOW_Valhallan_Stubber_2_brown_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_brown_Indep";
+	};
+	class TIOW_Valhallan_Launcher_1_brown_Indep: TIOW_Valhallan_Launcher_1_brown_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_brown_Indep";
+	};
+	class TIOW_Valhallan_Plasmagunner_1_brown_Indep: TIOW_Valhallan_Plasmagunner_1_brown_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_brown_Indep";
+	};
+	class TIOW_Valhallan_Tanker_1_brown_Indep: TIOW_Valhallan_Tanker_1_brown_Blu
+	{
+		side=2;
+		faction="TIOW_Val_Indep";
+		uniformClass="U_TIOW_Valhallan_brown_Indep";
+	};
+	class TIOW_Valhallan_Trooper_1_brown_OP: TIOW_Valhallan_Trooper_1_brown_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_brown_OP";
+	};
+	class TIOW_Valhallan_Trooper_2_brown_OP: TIOW_Valhallan_Trooper_2_brown_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_brown_OP";
+	};
+	class TIOW_Valhallan_NCO_1_brown_OP: TIOW_Valhallan_NCO_1_brown_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_brown_OP";
+	};
+	class TIOW_Valhallan_Meltagunner_1_brown_OP: TIOW_Valhallan_Meltagunner_1_brown_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_brown_OP";
+	};
+	class TIOW_Valhallan_Stubber_2_brown_OP: TIOW_Valhallan_Stubber_2_brown_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_brown_OP";
+	};
+	class TIOW_Valhallan_Launcher_1_brown_OP: TIOW_Valhallan_Launcher_1_brown_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_brown_OP";
+	};
+	class TIOW_Valhallan_Plasmagunner_1_brown_OP: TIOW_Valhallan_Plasmagunner_1_brown_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_brown_OP";
+	};
+	class TIOW_Valhallan_Tanker_1_brown_OP: TIOW_Valhallan_Tanker_1_brown_Blu
+	{
+		side=0;
+		faction="TIOW_Val_OP";
+		uniformClass="U_TIOW_Valhallan_brown_OP";
 	};
 };
+
+
+
 class cfgWeapons
 {
 	class ItemCore;
 	class Uniform_Base: ItemCore
 	{
 		class ItemInfo;
+	};
+	class U_TIOW_Fire_Warrior: Uniform_Base
+	{
+		scope=2;
+		author="Sokolonko";
+		displayName="Tau Fire Warrior [T'Au sept]";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\40k_tau\Weapons\Definitions\UI\Uniform.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_CA"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOWACE_Fire_Warrior";
+			uniformModel="-";
+			containerClass="Supply200";
+			mass=150;
+		};
+	};
+	class U_TIOW_Fire_Warrior_DY: U_TIOW_Fire_Warrior
+	{
+		displayName="Tau Fire Warrior [Dal'Yth sept]";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_DY_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_DY_CA"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Fire_Warrior_DY";
+		};
+	};
+	class U_TIOW_Fire_Warrior_SC: U_TIOW_Fire_Warrior
+	{
+		displayName="Tau Fire Warrior [Sa'Cea sept]";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_SC_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_SC_CA"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Fire_Warrior_SC";
+		};
+	};
+	class U_TIOW_Fire_Warrior_VL: U_TIOW_Fire_Warrior
+	{
+		displayName="Tau Fire Warrior [Vior'La sept]";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_VL_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_VL_CA"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Fire_Warrior_VL";
+		};
+	};
+	class U_TIOW_Fire_Warrior_FE: U_TIOW_Fire_Warrior
+	{
+		displayName="Tau Fire Warrior [Farsight Enclaves]";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_FE_CA",
+			"\40k_tau\Fire_Warrior\data\FW_Cloth_FE_CA"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Fire_Warrior_FE";
+		};
+	};
+	class U_TIOW_Pathfinder: Uniform_Base
+	{
+		scope=2;
+		author="Sokolonko";
+		displayName="Tau Fire Pathfinder [T'Au sept]";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\40k_tau\Weapons\Definitions\UI\Uniform.paa";
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOWACE_Pathfinder";
+			uniformModel="-";
+			containerClass="Supply160";
+			mass=40;
+		};
+	};
+	class U_TIOW_Pathfinder_DY: U_TIOW_Pathfinder
+	{
+		displayName="Tau Pathfinder [Dal'Yth sept]";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_DY_CA",
+			"\40k_tau\Pathfinder\data\Pathfinder_Cloth_DY_CA"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Pathfinder_DY";
+		};
+	};
+	class U_TIOW_Pathfinder_SC: U_TIOW_Pathfinder
+	{
+		displayName="Tau Pathfinder [Sa'Cea sept]";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_SC_CA",
+			"\40k_tau\Pathfinder\data\Pathfinder_Cloth_SC_CA"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Pathfinder_SC";
+		};
+	};
+	class U_TIOW_Pathfinder_VL: U_TIOW_Pathfinder
+	{
+		displayName="Tau Pathfinder [Vior'La sept]";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_VL_CA",
+			"\40k_tau\Pathfinder\data\Pathfinder_Cloth_VL_CA"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Pathfinder_VL";
+		};
+	};
+	class U_TIOW_Pathfinder_FE: U_TIOW_Pathfinder
+	{
+		displayName="Tau Pathfinder [Farsight Enclaves]";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\40k_tau\Fire_Warrior\data\FW_Armour_FE_CA",
+			"\40k_tau\Pathfinder\data\Pathfinder_Cloth_FE_CA"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Pathfinder_FE";
+		};
 	};
 	class U_TIOW_Air_Caste_Pilot: Uniform_Base
 	{
@@ -457,7 +1058,7 @@ class cfgWeapons
 		};
 		class ItemInfo: ItemInfo
 		{
-			uniformClass="TIOW_Air_Caste_Pilot_B";
+			uniformClass="TIOWACE_Air_Caste_Pilot_B";
 			uniformModel="-";
 			containerClass="Supply200";
 			mass=150;
@@ -716,6 +1317,330 @@ class cfgWeapons
 		class ItemInfo: ItemInfo
 		{
 			uniformClass="TIOW_Tau_Crew_FE_O";
+		};
+	};
+	class U_TIOW_Valhallan_Blu: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=2;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_black_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOWACE_Valhallan_Trooper_1_Blu";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_white_Blu: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=2;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform (White)";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_white_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_white_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_white_Blu";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_camo_Blu: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=2;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform (Camo)";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_camo_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_white_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_camo_Blu";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_brown_Blu: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=2;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform (Brown)";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_brown_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_brown_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_brown_Blu";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_Indep: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=1;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_black_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_Indep";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_white_Indep: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=1;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform (White)";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_white_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_white_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_white_Indep";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_camo_Indep: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=1;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform (Camo)";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_camo_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_white_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_camo_Indep";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_brown_Indep: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=1;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform (Brown)";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_brown_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_brown_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_brown_Indep";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_OP: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=1;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_black_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_OP";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_white_OP: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=1;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform (White)";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_white_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_white_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_white_OP";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_camo_OP: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=1;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform (Camo)";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_camo_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_white_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_camo_OP";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
+		};
+	};
+	class U_TIOW_Valhallan_brown_OP: Uniform_Base
+	{
+		scope=2;
+		scopeCurator=2;
+		scopeArsenal=1;
+		author="Sokolonko";
+		displayName="[Valhallan] Uniform (Brown)";
+		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F.p3d";
+		picture="\TIOW_Valhallans\Icon\Uniform_ca.paa";
+		hiddenSelections[]=
+		{
+			"camo",
+			"camo1"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\uniform_brown_CA.paa",
+			"\TIOW_Valhallans\TIOW_Valhallan_Uniforms\data\mittens_brown_CA.paa"
+		};
+		class ItemInfo: ItemInfo
+		{
+			uniformClass="TIOW_Valhallan_Trooper_1_brown_OP";
+			uniformModel="-";
+			containerClass="Supply80";
+			mass=135;
 		};
 	};
 };
