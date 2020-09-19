@@ -24,7 +24,7 @@ class CfgPatches
 	};
 };
 
-#define ADD_ACE_HITPOINTS(arm_armor,leg_armor)
+#define ADD_ACE_HITPOINTS(arm_armor,leg_armor) //Unused
      class HitLeftArm {
          armor = arm_armor;
          material = -1;
